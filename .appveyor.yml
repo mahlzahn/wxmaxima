@@ -149,7 +149,7 @@ build_script:
 test_script:
   - ps: |
       pushd build
-      #ctest -C Release
+      ctest -C Release
       if (! $?) { throw "CTest failed with exit code $LastExitCode" }
       popd
 
