@@ -610,7 +610,7 @@ wxWindow *ConfigDialogue::CreateWorksheetPanel()
 
   grid_sizer->Add(m_showUserDefinedLabels, wxSizerFlags().Border(wxUP | wxDOWN, 5*GetContentScaleFactor()));
 
-  displaySizer->Add(grid_sizer, wxSizerFlags());
+  displaySizer->Add(grid_sizer, wxSizerFlags().Border(wxALL, 5*GetContentScaleFactor()));
     
   m_hideBrackets = new wxCheckBox(displaySizer->GetStaticBox(), -1,
                                   _("Intelligently hide cell brackets"));
