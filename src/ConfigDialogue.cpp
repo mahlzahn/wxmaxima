@@ -701,60 +701,69 @@ wxWindow *ConfigDialogue::CreateRevertToDefaultsPanel()
               wxSizerFlags().Border(wxUP | wxDOWN,5*GetContentScaleFactor()).
               Expand()
     );
-  wxButton *resetAllButton = new wxButton(panel, -1, _("Reset all GUI settings"));
-  resetAllButton->Connect(wxEVT_BUTTON,
-                          wxCommandEventHandler(ConfigDialogue::OnResetAllToDefaults),
-                          NULL, this);
-  vsizer->Add(
-    resetAllButton,
-    wxSizerFlags().Border(wxUP | wxDOWN,5*GetContentScaleFactor()).
-    Expand()
-    );
-  wxButton *exportAllButton = new wxButton(panel, -1, _("Export all settings"));
-  exportAllButton->Connect(wxEVT_BUTTON,
-                          wxCommandEventHandler(ConfigDialogue::OnExportAll),
-                          NULL, this);
-  vsizer->Add(
-    exportAllButton,
-    wxSizerFlags().Border(wxUP | wxDOWN,5*GetContentScaleFactor()).
-    Expand()
-    );
-  wxButton *importSettingsButton = new wxButton(panel, -1, _("Import settings"));
-  importSettingsButton->Connect(wxEVT_BUTTON,
-                          wxCommandEventHandler(ConfigDialogue::OnImport),
-                          NULL, this);
-  vsizer->Add(
-    importSettingsButton,
-    wxSizerFlags().Border(wxUP | wxDOWN,5*GetContentScaleFactor()).
-    Expand()
-    );
-  wxButton *resetStylesButton = new wxButton(panel, -1, _("Reset the Style settings"));
+
+  wxStaticBoxSizer *revertSizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("Revert changes"));
+  
+  wxButton *resetStylesButton = new wxButton(revertSizer->GetStaticBox(), -1, _("Reset the Style settings"));
   resetStylesButton->Connect(wxEVT_BUTTON,
                           wxCommandEventHandler(ConfigDialogue::OnResetStyles),
                           NULL, this);
-  vsizer->Add(
+  revertSizer->Add(
     resetStylesButton,
-    wxSizerFlags().Border(wxUP | wxDOWN,5*GetContentScaleFactor()).
+    wxSizerFlags().Border(wxALL,5*GetContentScaleFactor()).
     Expand()
     );
-  wxButton *reloadAllButton = new wxButton(panel, -1, _("Reload all GUI settings from disc"));
+  wxButton *reloadAllButton = new wxButton(revertSizer->GetStaticBox(), -1, _("Reload all GUI settings from disc"));
   reloadAllButton->Connect(wxEVT_BUTTON,
                           wxCommandEventHandler(ConfigDialogue::OnReloadAll),
                           NULL, this);
-  vsizer->Add(
+  revertSizer->Add(
     reloadAllButton,
-    wxSizerFlags().Border(wxUP | wxDOWN,5*GetContentScaleFactor()).
+    wxSizerFlags().Border(wxALL,5*GetContentScaleFactor()).
     Expand()
     );
-  wxButton *reloadStylesButton = new wxButton(panel, -1, _("Reload the style settings from disc"));
+  wxButton *reloadStylesButton = new wxButton(revertSizer->GetStaticBox(), -1, _("Reload the style settings from disc"));
   reloadStylesButton->Connect(wxEVT_BUTTON,
                           wxCommandEventHandler(ConfigDialogue::OnReloadStyles),
                           NULL, this);
-  vsizer->Add(
+  revertSizer->Add(
     reloadStylesButton,
-    wxSizerFlags().Border(wxUP | wxDOWN,5*GetContentScaleFactor()).
+    wxSizerFlags().Border(wxALL,5*GetContentScaleFactor()).
     Expand()
     );
+  vsizer->Add(revertSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
+  
+  wxStaticBoxSizer *exportSizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("Import+Export"));
+
+  wxButton *resetAllButton = new wxButton(exportSizer->GetStaticBox(), -1, _("Reset all GUI settings"));
+  resetAllButton->Connect(wxEVT_BUTTON,
+                          wxCommandEventHandler(ConfigDialogue::OnResetAllToDefaults),
+                          NULL, this);
+  exportSizer->Add(
+    resetAllButton,
+    wxSizerFlags().Border(wxALL,5*GetContentScaleFactor()).
+    Expand()
+    );
+  wxButton *exportAllButton = new wxButton(exportSizer->GetStaticBox(), -1, _("Export all settings"));
+  exportAllButton->Connect(wxEVT_BUTTON,
+                          wxCommandEventHandler(ConfigDialogue::OnExportAll),
+                          NULL, this);
+  exportSizer->Add(
+    exportAllButton,
+    wxSizerFlags().Border(wxALL,5*GetContentScaleFactor()).
+    Expand()
+    );
+  wxButton *importSettingsButton = new wxButton(exportSizer->GetStaticBox(), -1, _("Import settings"));
+  importSettingsButton->Connect(wxEVT_BUTTON,
+                          wxCommandEventHandler(ConfigDialogue::OnImport),
+                          NULL, this);
+  exportSizer->Add(
+    importSettingsButton,
+    wxSizerFlags().Border(wxALL,5*GetContentScaleFactor()).
+    Expand()
+    );
+
+  vsizer->Add(exportSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
   WrappingStaticText *helpText2 = new WrappingStaticText(
     panel, -1,
     _("While wxMaxima is controlled by the settings here "
@@ -869,7 +878,7 @@ wxWindow *ConfigDialogue::CreateExportPanel()
   wxScrolled<wxPanel> *panel = new wxScrolled<wxPanel>(m_notebook, -1);
   panel->SetScrollRate(5*GetContentScaleFactor(), 5*GetContentScaleFactor());
 
-  wxBoxSizer *vsizer = new wxBoxSizer(wxVERTICAL);
+  wxBoxSizer *vsizer = new wxBoxSizer(wxVERTICAL);    
 
   wxStaticBoxSizer *texSizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("LaTeX"));
   wxFlexGridSizer *texGrid_sizer = new wxFlexGridSizer(9, 2, 5, 5);
