@@ -7537,7 +7537,7 @@ void wxMaxima::ListMenu(wxCommandEvent &event)
       Gen2Wiz *wiz = new Gen2Wiz(_("List"), _("n"),
                                  expr, wxEmptyString,
                                  m_worksheet->m_configuration,
-                                 this, -1, _("Return the list without its last n elements"),
+                                 this, -1, _("Return the list without its first n elements"),
                                  true);
       //wiz->Centre(wxBOTH);
       if (wiz->ShowModal() == wxID_OK)
@@ -7561,7 +7561,7 @@ void wxMaxima::ListMenu(wxCommandEvent &event)
       Gen2Wiz *wiz = new Gen2Wiz(_("List"), _("n"),
                                  expr, wxEmptyString,
                                  m_worksheet->m_configuration,
-                                 this, -1, _("Return the list without its first n elements"),
+                                 this, -1, _("Return the list without its last n elements"),
                                  true);
       //wiz->Centre(wxBOTH);
       if (wiz->ShowModal() == wxID_OK)
@@ -7581,7 +7581,7 @@ void wxMaxima::ListMenu(wxCommandEvent &event)
       Gen2Wiz *wiz = new Gen2Wiz(_("List"), _("Number of elements"),
                                  expr, wxEmptyString,
                                  m_worksheet->m_configuration,
-                                 this, -1, _("Extract the last n elements from a list"),
+                                 this, -1, _("Extract the first n elements from a list"),
                                  true);
       //wiz->Centre(wxBOTH);
       if (wiz->ShowModal() == wxID_OK)
