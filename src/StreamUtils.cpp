@@ -59,10 +59,12 @@ UTF8Decoder::UTF8Decoder()
 #if !(defined(__WINDOWS__) && wxUSE_UNICODE)
     // This works on newer Windows 10, but fails on older Windows,
     // thus we fall back to the deprecated utf8 codec.
-    : m_locale("C.UTF-8"),
-      m_codec(std::use_facet<std::remove_reference<decltype(m_codec)>::type>(m_locale))
+    : m_codec(std::use_facet<std::remove_reference<decltype(m_codec)>::type>(m_locale))
 #endif
 {
+#if !(defined(__WINDOWS__) && wxUSE_UNICODE)
+  m_locale = std::locale("");
+#endif      
 }
 
 UTF8Decoder::DecodeResult UTF8Decoder::Decode(UTF8Decoder::State &state,

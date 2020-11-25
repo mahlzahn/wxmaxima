@@ -642,7 +642,7 @@ wxWindow *ConfigDialogue::CreateWorksheetPanel()
                                    _("Fixed font in text controls"));
   displaySizer->Add(m_fixedFontInTC, wxSizerFlags());
 
-  vsizer->Add(displaySizer, wxSizerFlags().Expand());
+  vsizer->Add(displaySizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
   vsizer->Add(10*GetContentScaleFactor(), 10*GetContentScaleFactor());
   
   wxStaticBoxSizer *actionSizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("Interaction"));
@@ -669,7 +669,7 @@ wxWindow *ConfigDialogue::CreateWorksheetPanel()
   m_offerKnownAnswers = new wxCheckBox(actionSizer->GetStaticBox(), -1, _("Offer answers for questions known from previous runs"));
   actionSizer->Add(m_offerKnownAnswers, wxSizerFlags());
 
-  vsizer->Add(actionSizer, wxSizerFlags().Expand());
+  vsizer->Add(actionSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
   vsizer->Add(10*GetContentScaleFactor(), 10*GetContentScaleFactor());
 
   wxStaticBoxSizer *evalSizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("Hotkeys for sending commands to maxima"));
@@ -680,7 +680,7 @@ wxWindow *ConfigDialogue::CreateWorksheetPanel()
   
   m_numpadEnterEvaluates = new wxCheckBox(evalSizer->GetStaticBox(), -1, _("\"Numpad Enter\" always evaluates cells"));
   evalSizer->Add(m_numpadEnterEvaluates, wxSizerFlags());
-  vsizer->Add(evalSizer, wxSizerFlags().Expand());
+  vsizer->Add(evalSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
 
   panel->SetSizer(vsizer);
   panel->FitInside();
@@ -904,7 +904,7 @@ wxWindow *ConfigDialogue::CreateExportPanel()
   m_wrapLatexMath = new wxCheckBox(texSizer->GetStaticBox(), -1, _("\"Copy LaTeX\" adds equation markers"));
   texSizer->Add(m_wrapLatexMath, wxSizerFlags());
 
-  vsizer->Add(texSizer, wxSizerFlags(1).Expand().Border(wxALL, 5*GetContentScaleFactor()));
+  vsizer->Add(texSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
 
   wxStaticBoxSizer *html_sizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("HTML"));
   wxFlexGridSizer *htmlGrid_sizer = new wxFlexGridSizer(9, 2, 5, 5);
@@ -1109,7 +1109,7 @@ wxWindow *ConfigDialogue::CreateMaximaPanel()
   nameSizer->Add(mpBrowse2, wxSizerFlags().Expand().Border(wxUP | wxDOWN, 0));
 
   invocationSizer->Add(nameSizer, wxSizerFlags().Expand().Border(wxUP | wxDOWN, 0));
-  vsizer->Add(invocationSizer, wxSizerFlags(1).Expand());
+  vsizer->Add(invocationSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
   vsizer->Add(10*GetContentScaleFactor(), 10*GetContentScaleFactor());
 
   wxStaticBoxSizer *configSizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("Maxima configuration"));
@@ -1173,8 +1173,8 @@ wxWindow *ConfigDialogue::CreateMaximaPanel()
   
   configSizer->Add(new wxStaticText(configSizer->GetStaticBox(), -1,
                              _("Environment variables for maxima")), wxSizerFlags().Expand());
-  configSizer->Add(m_maximaEnvVariables, wxSizerFlags(5).Expand().Border(wxRIGHT | wxBOTTOM, 10*GetContentScaleFactor()));
-  vsizer->Add(configSizer, wxSizerFlags(5).Expand());
+  configSizer->Add(m_maximaEnvVariables, wxSizerFlags().Expand().Border(wxRIGHT | wxBOTTOM, 10*GetContentScaleFactor()));
+  vsizer->Add(configSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
 
   vsizer->Add(10*GetContentScaleFactor(), 10*GetContentScaleFactor());
   wxStaticBoxSizer *handlingSizer = new wxStaticBoxSizer(wxVERTICAL, panel, _("Maxima usage"));
@@ -1183,7 +1183,7 @@ wxWindow *ConfigDialogue::CreateMaximaPanel()
   handlingSizer->Add(m_abortOnError, wxSizerFlags());
   m_restartOnReEvaluation = new wxCheckBox(handlingSizer->GetStaticBox(), -1, _("Start a new maxima for each re-evaluation"));
   handlingSizer->Add(m_restartOnReEvaluation, wxSizerFlags());
-  vsizer->Add(handlingSizer, wxSizerFlags().Expand());
+  vsizer->Add(handlingSizer, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
 
   panel->SetSizer(vsizer);
   panel->FitInside();
@@ -1541,7 +1541,7 @@ wxWindow *ConfigDialogue::CreateStylePanel()
   grid_sizer_1->Add(m_useUnicodeMaths, wxSizerFlags().Border(wxUP | wxDOWN, 5*GetContentScaleFactor()));
 
   sb_sizer_1->Add(grid_sizer_1, wxSizerFlags(1).Expand());
-  vsizer->Add(sb_sizer_1, wxSizerFlags(1).Expand());
+  vsizer->Add(sb_sizer_1, wxSizerFlags().Expand().Border(wxALL, 5*GetContentScaleFactor()));
 
   vbox_sizer->Add(m_styleColor, 0, wxUP | wxDOWN | wxALIGN_CENTER, 5*GetContentScaleFactor());
   vbox_sizer->Add(m_getStyleFont, 0, wxUP | wxDOWN | wxALIGN_CENTER, 5*GetContentScaleFactor());
@@ -1554,12 +1554,12 @@ wxWindow *ConfigDialogue::CreateStylePanel()
   hbox_sizer_2->Add(vbox_sizer, 1, wxUP | wxDOWN | wxEXPAND, 0);
   sb_sizer_2->Add(hbox_sizer_2, 0, wxUP | wxDOWN | wxEXPAND, 0);
 
-  vsizer->Add(sb_sizer_2, 1, wxUP | wxDOWN | wxEXPAND, 3);
+  vsizer->Add(sb_sizer_2, 0, wxALL, 5*GetContentScaleFactor());
 
   // load save buttons
   hbox_sizer_3->Add(m_loadStyle, wxSizerFlags().Border(wxUP | wxDOWN, 5*GetContentScaleFactor()));
   hbox_sizer_3->Add(m_saveStyle, wxSizerFlags().Border(wxUP | wxDOWN, 5*GetContentScaleFactor()));
-  vsizer->Add(hbox_sizer_3, 1, wxALIGN_RIGHT, 3);
+  vsizer->Add(hbox_sizer_3, 0, wxALIGN_RIGHT | wxALL, 5*GetContentScaleFactor());
 
   panel->SetSizer(vsizer);
   panel->FitInside();
